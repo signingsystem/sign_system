@@ -98,6 +98,9 @@ public class Register extends AppCompatActivity {
                     Toast toast;
                     if(info.equals("true")){
                         toast=Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
+//                        Intent intent = new Intent(Register.this,Takephoto.class );
+//                        startActivity(intent);
+
                     }else{
                         toast=Toast.makeText(Register.this, "注册失败", Toast.LENGTH_SHORT);
                     }
