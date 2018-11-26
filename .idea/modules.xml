@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SignSystem.iml" filepath="$PROJECT_DIR$/SignSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sign_system.iml" filepath="$PROJECT_DIR$/sign_system.iml" />
     </modules>
   </component>
 </project>

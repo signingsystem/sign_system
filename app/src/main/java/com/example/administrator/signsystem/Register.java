@@ -2,6 +2,7 @@ package com.example.administrator.signsystem;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import web.WebService;
@@ -40,6 +42,18 @@ public class Register extends AppCompatActivity {
         reRegPass = findViewById(R.id.rePass);
 
         addOnClickListener();
+        setBackButton();
+    }
+
+    private void setBackButton() {
+        ImageButton imageButton = this.findViewById(R.id.registerReturnBtn);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this,MainActivity.class );
+                startActivity(intent);
+            }
+        });
     }
 
     public void addOnClickListener(){
