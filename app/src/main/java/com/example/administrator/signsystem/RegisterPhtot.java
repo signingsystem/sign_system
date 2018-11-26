@@ -2,14 +2,14 @@ package com.example.administrator.signsystem;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class Takephoto extends AppCompatActivity {
+public class RegisterPhtot extends AppCompatActivity {
     public static final int CAMERA_REQUEST = 592;
 
     @Override
@@ -20,13 +20,13 @@ public class Takephoto extends AppCompatActivity {
         setReturnButton();
 
     }
-//返回主页面
+    //返回主页面
     private void setReturnButton() {
         Button button = this.findViewById(R.id.returnMainButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Takephoto.this,MainActivity.class );
+                Intent intent = new Intent(RegisterPhtot.this,MainActivity.class );
                 startActivity(intent);
             }
         });
