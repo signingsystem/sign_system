@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrator.signsystem">
-
-    <!-- 联网权限 -->
+    //获取网络服务
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    //获取位置服务
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    //调用照相机
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +27,8 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".Register" />
-        <activity android:name=".RegisterPhtot"></activity>
+        <activity android:name=".RegisterPhtot" />
+        <activity android:name=".SignIn"></activity>
     </application>
 
 </manifest>
