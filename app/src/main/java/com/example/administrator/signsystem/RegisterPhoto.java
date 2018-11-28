@@ -73,6 +73,7 @@ public class RegisterPhoto extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                cameraIntent.putExtra("android.intent.extras.CAMERA_FACING",1);//调用前置摄像头，此处应该加一个判断，用户手机是否有前置摄像头
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(mPhotoFile));
                 startActivityForResult(cameraIntent, CAMERA_REQUEST); //启动照相
             }
