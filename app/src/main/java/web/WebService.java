@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Time;
+import java.util.Date;
 
 public class WebService {
     private static String IP="188.131.169.231:8080";
@@ -86,6 +88,80 @@ public class WebService {
         return null;
     }
 
+    //上传签到信息
+    public static String executeSignHttpGet(String username, Date date, String hour, String minute){
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
+        try {
+            String path = "http://" + IP + "/sign_system/Signin";
+            path = path + "?username=" + username + "&date=" + date + "&hour=" + hour
+                    + "&minute=" + minute;
+
+            conn = (HttpURLConnection) new URL(path).openConnection();
+            conn.setConnectTimeout(3000);
+            conn.setReadTimeout(3000);
+            conn.setDoInput(true);
+            conn.setRequestMethod("GET");//设置获取信息的方式
+            conn.setRequestProperty("Charset", "UTF-8");
+
+            if (conn.getResponseCode() == 200){
+                inputStream = conn.getInputStream();
+                return parseInfo(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            //意外退出时进行连接关闭保护
+            if(conn != null){
+                conn.disconnect();
+            }
+            if(inputStream != null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    //根据用户账号获取签到天数
+    private static String getSignDays(String username){
+        HttpURLConnection conn = null;
+        InputStream inputStream = null;
+        try{
+            String path = "http://" + IP + "sign_system/GetSignDays";
+            path = path + "?username=" + username;
+
+            conn = (HttpURLConnection) new URL(path).openConnection();
+            conn.setConnectTimeout(3000);
+            conn.setReadTimeout(3000);
+            conn.setDoInput(true);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Charset", "UTF-8");
+
+            if (conn.getResponseCode() == 200){
+                inputStream = conn.getInputStream();
+                return parseInfo(inputStream);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        finally {
+            // 以外退出断开连接
+            if(conn != null)
+                conn.disconnect();
+            if(inputStream != null)
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+        return null;
+    }
+
     private static String parseInfo(InputStream inputStream)throws IOException{
         byte[] data = read(inputStream);
         //转化为字符串
@@ -103,6 +179,5 @@ public class WebService {
         inputStream.close();
         return outputStream.toByteArray();
     }
-
 
 }
