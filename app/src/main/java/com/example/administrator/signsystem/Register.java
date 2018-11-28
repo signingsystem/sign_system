@@ -100,7 +100,8 @@ public class Register extends AppCompatActivity {
                     Toast toast;
                     if(info.equals("true")){
                         toast=Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
-                        intent = new Intent(Register.this,RegisterPhtot.class );
+                        intent = new Intent(Register.this,RegisterPhoto.class );
+                        intent.putExtra("name",regUser.getText().toString());//传递regUser
                         startActivity(intent);
 
                     }else{
