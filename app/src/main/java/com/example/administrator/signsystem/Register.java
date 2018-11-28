@@ -2,6 +2,7 @@ package com.example.administrator.signsystem;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import web.WebService;
@@ -24,6 +26,8 @@ public class Register extends AppCompatActivity {
     private static Handler handler;
     //接受服务器返回数据
     String info;
+
+    private Intent intent;
 
     private Toast toast;
 
@@ -40,6 +44,18 @@ public class Register extends AppCompatActivity {
         reRegPass = findViewById(R.id.rePass);
 
         addOnClickListener();
+        setBackButton();
+    }
+
+    private void setBackButton() {
+        ImageButton imageButton = this.findViewById(R.id.registerReturnBtn);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Register.this,MainActivity.class );
+                startActivity(intent);
+            }
+        });
     }
 
     public void addOnClickListener(){
@@ -84,6 +100,10 @@ public class Register extends AppCompatActivity {
                     Toast toast;
                     if(info.equals("true")){
                         toast=Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
+                        intent = new Intent(Register.this,RegisterPhoto.class );
+                        intent.putExtra("name",regUser.getText().toString());//传递regUser
+                        startActivity(intent);
+
                     }else{
                         toast=Toast.makeText(Register.this, "注册失败", Toast.LENGTH_SHORT);
                     }

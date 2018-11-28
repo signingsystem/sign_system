@@ -124,6 +124,10 @@ public class Login extends AppCompatActivity{
                 public void run() {
                     infotv.setText(info);
                     dialog.dismiss();
+                    Intent intent = new Intent(Login.this,LoginPhoto.class);
+                    intent.putExtra("name",username.getText().toString());//传递username
+                    startActivity(intent);
+
                     /*try {s
                         Thread.sleep(3000);
                     } catch (InterruptedException e) {

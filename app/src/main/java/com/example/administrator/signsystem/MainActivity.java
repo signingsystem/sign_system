@@ -14,9 +14,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setLoginButton();
+        setRegisterButton();
 
 //        SharedPreferences sf = getSharedPreferences("file_name", 0);
 //        SharedPreferences.Editor editor = sf.edit();
+    }
+
+    private void setRegisterButton() {
+        Button button = this.findViewById(R.id.registerBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Register.class );
+                startActivity(intent);
+            }
+        });
     }
 
     private void setLoginButton(){
