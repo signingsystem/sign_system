@@ -123,10 +123,17 @@ public class Login extends AppCompatActivity{
                 @Override
                 public void run() {
                     infotv.setText(info);
-                    dialog.dismiss();
-                    Intent intent = new Intent(Login.this,LoginPhoto.class);
-                    intent.putExtra("name",username.getText().toString());//传递username
-                    startActivity(intent);
+                    if(info.equals("true")){
+                        dialog.setMessage("^-^登录成功^-^");
+                        dialog.dismiss();
+                        Intent intent = new Intent(Login.this,LoginPhoto.class);
+                        intent.putExtra("name",username.getText().toString());//传递username
+                        startActivity(intent);
+                    }
+                    else {
+                        dialog.setMessage("用户名或密码错误-_-");
+                        dialog.dismiss();
+                    }
 
                     /*try {s
                         Thread.sleep(3000);
