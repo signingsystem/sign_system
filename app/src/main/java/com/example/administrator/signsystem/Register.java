@@ -17,6 +17,8 @@ import android.widget.Toast;
 import web.WebService;
 
 public class Register extends AppCompatActivity {
+    //返回按钮
+    ImageButton regReturnBtn;
     //注册按钮
     Button regBtn;
     EditText regUser, regPass, reRegPass;
@@ -26,9 +28,7 @@ public class Register extends AppCompatActivity {
     private static Handler handler;
     //接受服务器返回数据
     String info;
-
     private Intent intent;
-
     private Toast toast;
 
     @Override
@@ -38,27 +38,27 @@ public class Register extends AppCompatActivity {
 
         handler = new Handler();
 
+        regReturnBtn = findViewById(R.id.registerReturnBtn);
         regBtn = findViewById(R.id.register);
         regUser = findViewById(R.id.registerUser);
         regPass = findViewById(R.id.registerPass);
         reRegPass = findViewById(R.id.rePass);
 
         addOnClickListener();
-        setBackButton();
     }
 
-    private void setBackButton() {
-        ImageButton imageButton = this.findViewById(R.id.registerReturnBtn);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+
+
+    public void addOnClickListener(){
+        //设置返回按钮点击监听
+        regReturnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Register.this,MainActivity.class );
                 startActivity(intent);
             }
         });
-    }
-
-    public void addOnClickListener(){
+        //设置注册界面注册按钮监听
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +103,7 @@ public class Register extends AppCompatActivity {
                         intent = new Intent(Register.this,RegisterPhoto.class );
                         intent.putExtra("name",regUser.getText().toString());//传递regUser
                         startActivity(intent);
-
+                        
                     }else{
                         toast=Toast.makeText(Register.this, "注册失败", Toast.LENGTH_SHORT);
                     }
