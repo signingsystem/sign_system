@@ -126,13 +126,13 @@ public class WebService {
         return null;
     }
 
-    //根据用户账号获取签到天数
-    private static String getSignDays(String username){
+    //根据用户账号和当前月份获取当月签到天数
+    private static String getSignDays(String username, String month){
         HttpURLConnection conn = null;
         InputStream inputStream = null;
         try{
             String path = "http://" + IP + "sign_system/GetSignDays";
-            path = path + "?username=" + username;
+            path = path + "?username=" + username + "&month=" + month;
 
             conn = (HttpURLConnection) new URL(path).openConnection();
             conn.setConnectTimeout(3000);
