@@ -31,8 +31,21 @@ public class RegisterPhoto extends AppCompatActivity {
         setContentView(R.layout.activity_register_photo);
         setTakePhotoButton();
         setReturnButton();
+        setUploadButton();
 
     }
+
+    private void setUploadButton() {
+        Button button = this.findViewById(R.id.upload);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
+            }
+        });
+
+    }
+
     //返回主页面
     private void setReturnButton() {
         Button button = this.findViewById(R.id.returnMainButton);
@@ -62,7 +75,6 @@ public class RegisterPhoto extends AppCompatActivity {
                 }
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(mPhotoFile));
                 startActivityForResult(cameraIntent, CAMERA_REQUEST); //启动照相
-                UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
             }
         });
     }
@@ -84,5 +96,6 @@ public class RegisterPhoto extends AppCompatActivity {
                 imageView.setImageBitmap(photo);
             }
         }
+        PhotoDispose photodispose=new PhotoDispose(mPhotoPath);
     }
 }

@@ -10,25 +10,46 @@
         android:layout_width="368dp"
         android:layout_height="495dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="8dp">
-
-        <Button
-            android:id="@+id/takephoto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="拍照" />
 
         <ImageView
             android:id="@+id/photo"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="377dp"
             tools:srcCompat="@tools:sample/avatars" />
-        <Button
-            android:id="@+id/returnMainButton"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="返回主页" />
+            android:layout_height="59dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/returnMainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="返回" />
+
+            <Button
+                android:id="@+id/takephoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="拍照" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="上传" />
+        </LinearLayout>
 
     </LinearLayout>
 

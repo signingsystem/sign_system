@@ -3,6 +3,7 @@ package com.example.administrator.signsystem;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,17 @@ public class LoginPhoto extends AppCompatActivity {
         setGetPhotoButton();
         setCancelButton();
         setVerifyButton();
+        setUploadButton();
+    }
+
+    private void setUploadButton() {
+        Button button = this.findViewById(R.id.upload);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
+            }
+        });
     }
 
     private void setVerifyButton() {
@@ -53,6 +65,7 @@ public class LoginPhoto extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//照相
                 try {
                     mPhotoPath="/storage/emulated/0/"+getPhotoFileName();
                     mPhotoFile=new File(mPhotoPath);
@@ -60,16 +73,17 @@ public class LoginPhoto extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//照相
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(mPhotoFile));
                 startActivityForResult(cameraIntent, CAMERA_REQUEST); //启动照相
-                UpLoadPhoto upload=new UpLoadPhoto("0.jpg");//上传照片
+
             }
         });
     }
 
     private String getPhotoFileName(){
+        intent=getIntent();
+        username=intent.getStringExtra("name");
         return username+".jpg";
-
     }
 
     private void setCancelButton() {
@@ -91,5 +105,6 @@ public class LoginPhoto extends AppCompatActivity {
                 imageView.setImageBitmap(photo);
             }
         }
+        PhotoDispose photodispose=new PhotoDispose(mPhotoPath);
     }
 }
