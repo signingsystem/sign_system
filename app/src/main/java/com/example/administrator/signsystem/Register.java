@@ -98,7 +98,7 @@ public class Register extends AppCompatActivity {
                 public void run() {
                     dialog.dismiss();
                     Toast toast;
-                    if(info.equals("true")){
+                    if(info.equals("true")&&regPass.getText().toString().equals(reRegPass.getText().toString())){
                         toast=Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
                         intent = new Intent(Register.this,RegisterPhoto.class );
                         intent.putExtra("name",regUser.getText().toString());//传递regUser
