@@ -126,7 +126,7 @@ public class WebService {
     }
 
     //根据用户账号和当前月份获取当月签到天数
-    private static String getSignDays(String username, int month){
+    private static int getSignDays(String username, int month){
         HttpURLConnection conn = null;
         InputStream inputStream = null;
         try{
@@ -142,13 +142,13 @@ public class WebService {
 
             if (conn.getResponseCode() == 200){
                 inputStream = conn.getInputStream();
-                return parseInfo(inputStream);
+                return Integer.parseInt(parseInfo(inputStream));
             }
         }catch (IOException e){
             e.printStackTrace();
         }
         finally {
-            // 以外退出断开连接
+            // 意外退出断开连接
             if(conn != null)
                 conn.disconnect();
             if(inputStream != null)
@@ -158,7 +158,7 @@ public class WebService {
                     e.printStackTrace();
                 }
         }
-        return null;
+        return -1;//返回-1表示异常
     }
 
     private static String parseInfo(InputStream inputStream)throws IOException{
