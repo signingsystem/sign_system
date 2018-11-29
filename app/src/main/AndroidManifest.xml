@@ -30,7 +30,6 @@
         <activity android:name=".RegisterPhoto" />
         <activity android:name=".SignIn" />
         <activity android:name=".LoginPhoto" />
-        <activity android:name=".PermissionRequest"></activity>
     </application>
 
 </manifest>
