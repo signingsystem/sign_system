@@ -31,20 +31,9 @@ public class RegisterPhoto extends AppCompatActivity {
         setContentView(R.layout.activity_register_photo);
         setTakePhotoButton();
         setReturnButton();
-        setUploadButton();
 
     }
 
-    private void setUploadButton() {
-        Button button = this.findViewById(R.id.upload);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
-            }
-        });
-
-    }
 
     //返回主页面
     private void setReturnButton() {
@@ -98,5 +87,6 @@ public class RegisterPhoto extends AppCompatActivity {
             }
         }
         PhotoDispose photodispose=new PhotoDispose(mPhotoPath);
+        UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
     }
 }

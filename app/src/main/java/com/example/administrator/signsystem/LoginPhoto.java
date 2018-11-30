@@ -16,6 +16,14 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.IOException;
 
+
+import UpLoadApi.VerifyAPI;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import web.UpLoadPhoto;
 
 import static com.example.administrator.signsystem.RegisterPhoto.CAMERA_REQUEST;
@@ -26,6 +34,10 @@ public class LoginPhoto extends AppCompatActivity {
     private String mPhotoPath;
     private String username;
     private Intent intent;
+    private Retrofit retrofit;
+    private String URL="http://188.131.169.231:5000";
+    private VerifyAPI api;
+    private Call<ResponseBody> call;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,35 +48,44 @@ public class LoginPhoto extends AppCompatActivity {
         setGetPhotoButton();
         setCancelButton();
         setVerifyButton();
-        setUploadButton();
 }
-
-    private void setUploadButton() {
-        Button button = this.findViewById(R.id.upload);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
-            }
-        });
-    }
 
     private void setVerifyButton() {
         Button button = this.findViewById(R.id.verify);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Verify verify=new Verify(username);
-                verify.sendMessage();
-                String message=verify.returnMessage();
-                Double value=Double.valueOf(message);
-                if(value>70){
-                    Intent intent = new Intent(LoginPhoto.this,SignIn.class );
-                    startActivity(intent);
-                }
-                else{
+                Verify();
+            }
+        });
+    }
 
+    public void Verify(){//算是一个经验教训，这个地方只能这样写，因为实际上服务器返回值是有延迟的，所以必须当服务器有response的时候，再去进行下一步操作
+        retrofit=new Retrofit.Builder()
+                .baseUrl(URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        api=retrofit.create(VerifyAPI.class);
+        call=api.postusername(username);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    String message=response.body().string();
+                    Double value=Double.valueOf(message.toString());
+                    if(value>70){
+                        Intent intent = new Intent(LoginPhoto.this,SignIn.class );
+                        startActivity(intent);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t){
+
             }
         });
     }
@@ -84,7 +105,7 @@ public class LoginPhoto extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                cameraIntent.putExtra("android.intent.extras.CAMERA_FACING",1);//调用前置摄像头，此处应该加一个判断，用户手机是否有前置摄像头
+                //cameraIntent.putExtra("android.intent.extras.CAMERA_FACING",1);//调用前置摄像头，此处应该加一个判断，用户手机是否有前置摄像头
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(mPhotoFile));
                 startActivityForResult(cameraIntent, CAMERA_REQUEST); //启动照相
 
@@ -118,5 +139,6 @@ public class LoginPhoto extends AppCompatActivity {
             }
         }
         PhotoDispose photodispose=new PhotoDispose(mPhotoPath);
+        UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
     }
 }

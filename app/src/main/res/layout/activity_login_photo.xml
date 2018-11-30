@@ -51,16 +51,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/upload"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="上传" />
-
-                <Button
                     android:id="@+id/verify"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="验证" />
+                    android:text="签到" />
 
             </LinearLayout>
         </LinearLayout>
