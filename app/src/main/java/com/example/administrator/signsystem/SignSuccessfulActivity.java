@@ -10,11 +10,11 @@ import java.util.Calendar;
 import web.WebService;
 
 public class SignSuccessfulActivity extends AppCompatActivity {
-    TextView signDays;
+    private TextView signDays;
     //返回主线程更新的数据
     private static Handler handler;
     //获取当前签到天数
-    int signTimes;
+    private int signTimes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
