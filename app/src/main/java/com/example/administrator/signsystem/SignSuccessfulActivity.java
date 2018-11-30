@@ -29,7 +29,7 @@ public class SignSuccessfulActivity extends AppCompatActivity {
         @Override
         public void run() {
             String username = "wdz";/*需要获取当前用户名*/
-            signTimes = WebService.getSignDays(username,2);
+            signTimes = WebService.getSignDays(username);
             //子线程修改数据
             handler.post(new Runnable() {
                 @Override
