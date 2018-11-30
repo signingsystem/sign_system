@@ -126,7 +126,7 @@ public class WebService {
     }
 
     //根据用户账号和当前月份获取当月签到天数
-    private static int getSignDays(String username, int month){
+    public static int getSignDays(String username, int month){
         HttpURLConnection conn = null;
         InputStream inputStream = null;
         try{
