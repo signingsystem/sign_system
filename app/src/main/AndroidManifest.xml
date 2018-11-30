@@ -30,6 +30,7 @@
         <activity android:name=".RegisterPhoto" />
         <activity android:name=".SignIn" />
         <activity android:name=".LoginPhoto" />
+        <activity android:name=".SignSuccessfulActivity"></activity>
     </application>
 
 </manifest>
