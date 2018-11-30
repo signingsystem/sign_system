@@ -98,15 +98,22 @@ public class Register extends AppCompatActivity {
                 public void run() {
                     dialog.dismiss();
                     Toast toast;
-                    if(info.equals("true")&&regPass.getText().toString().equals(reRegPass.getText().toString())){
-                        toast=Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
-                        intent = new Intent(Register.this,RegisterPhoto.class );
-                        intent.putExtra("name",regUser.getText().toString());//传递regUser
-                        startActivity(intent);
-                        
-                    }else{
-                        toast=Toast.makeText(Register.this, "注册失败", Toast.LENGTH_SHORT);
+                    if (regUser.getText().toString().equals("")) {
+                        toast = Toast.makeText(Register.this,"用户名为空请重新注册",Toast.LENGTH_SHORT);
                     }
+                    else if (regPass.getText().toString().equals("")) {
+                        toast = Toast.makeText(Register.this,"密码为空请重新注册",Toast.LENGTH_SHORT);
+                    }
+                    else if (info.equals("true")&& regPass.getText().toString().equals(reRegPass.getText().toString()) ) {
+                            toast = Toast.makeText(Register.this, "注册成功", Toast.LENGTH_SHORT);
+                            intent = new Intent(Register.this, RegisterPhoto.class);
+                            intent.putExtra("name", regUser.getText().toString());//传递regUser
+                            startActivity(intent);
+
+                        } else {
+                            toast = Toast.makeText(Register.this, "注册失败", Toast.LENGTH_SHORT);
+                        }
+
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                     /*try {s
