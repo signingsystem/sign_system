@@ -32,6 +32,9 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private Button Sign;
     private static final String TAG="GpsActivity";
     private TextView editText;
+    private String username;
+    private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
         initView();
 
+        intent=getIntent();
+        username=intent.getStringExtra("name");
         Sign.setOnClickListener(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         openGPSSettings();
@@ -119,14 +124,17 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
         }
 
     @Override
-                public void onClick(View v) {
-                    if(v.getId()==R.id.signButton){
-                        if(judge()){
-                            Toast.makeText(this, "签到成功", Toast.LENGTH_LONG).show();
-            }
-            else{
-                Toast.makeText(this, "你不在签到范围内", Toast.LENGTH_LONG).show();
-            }
+    public void onClick(View v) {
+        if(v.getId()==R.id.signButton){
+//            if(judge()){
+                Toast.makeText(this, "签到成功", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(SignIn.this,SignSuccessfulActivity.class );
+                intent.putExtra("name",username);
+                startActivity(intent);
+//            }
+//            else{
+//                Toast.makeText(this, "你不在签到范围内", Toast.LENGTH_LONG).show();
+//            }
         }
     }
 

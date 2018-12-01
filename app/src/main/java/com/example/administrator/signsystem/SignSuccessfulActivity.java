@@ -1,5 +1,6 @@
 package com.example.administrator.signsystem;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +16,15 @@ public class SignSuccessfulActivity extends AppCompatActivity {
     private static Handler handler;
     //获取当前签到天数
     int signTimes;
+    private Intent intent ;
+    private String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_successful);
+
+        intent=getIntent();
+        username=intent.getStringExtra("name");
 
         handler = new Handler();
         signDays = findViewById(R.id.signSumDay);
@@ -28,7 +34,7 @@ public class SignSuccessfulActivity extends AppCompatActivity {
     private class MyThread implements Runnable{
         @Override
         public void run() {
-            String username = "wdz";/*需要获取当前用户名*/
+            //String username = "wdz";/*需要获取当前用户名*/
             signTimes = WebService.getSignDays(username);
             //子线程修改数据
             handler.post(new Runnable() {

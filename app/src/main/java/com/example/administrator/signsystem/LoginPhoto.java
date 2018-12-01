@@ -76,6 +76,7 @@ public class LoginPhoto extends AppCompatActivity {
                     Double value=Double.valueOf(message.toString());
                     if(value>70){
                         Intent intent = new Intent(LoginPhoto.this,SignIn.class );
+                        intent.putExtra("name",username);
                         startActivity(intent);
                     }
                 } catch (IOException e) {
@@ -114,8 +115,6 @@ public class LoginPhoto extends AppCompatActivity {
     }
 
     private String getPhotoFileName(){
-        intent=getIntent();
-        username=intent.getStringExtra("name");
         return username+".jpg";
     }
 
@@ -140,5 +139,6 @@ public class LoginPhoto extends AppCompatActivity {
         }
         PhotoDispose photodispose=new PhotoDispose(mPhotoPath);
         UpLoadPhoto upload=new UpLoadPhoto(mPhotoPath);//上传照片
+
     }
 }
